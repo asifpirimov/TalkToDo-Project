@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Task Manager</h1>
+            <p class="sub-heading">Your tasks, organized.</p>
+        </header>
+
+        <main>
+            <section class="task-form">
+                <h2>Add New Task</h2>
+                <form action="/add-task" method="POST">
+                    <input type="text" name="title" placeholder="Task title" required>
+                    <textarea name="description" placeholder="Task description" rows="3"></textarea>
+                    <input type="date" name="dueDate" required>
+                    <button type="submit">Add Task</button>
+                </form>
+            </section>
+
+            <section class="task-list">
+                <h2>Your Tasks</h2>
+                <ul>
+                    <% tasks.forEach(function(task) { %>
+                        <li>
+                            <div class="task-details">
+                                <strong><%= task.title %></strong>
+                                <em><%= task.due_date %></em>
+                            </div>
+                            <div class="task-actions">
+                                <form action="/delete-task/<%= task.id %>" method="POST">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Task Manager | All Rights Reserved</p>
+        </footer>
+    </div>
+
+</body>
+</html>
