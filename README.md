@@ -25,3 +25,9 @@
 git clone https://github.com/asifpirimov/TalkToDo-Project.git
 cd TalkToDo-Project
 ```
+## Install Dependencies
+
+```bash
+npm install
+pip install -r requirements.txt
+```
