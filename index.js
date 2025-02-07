@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
+import { PythonShell } from "python-shell";
 
 dotenv.config()
 // App Configuration
@@ -139,6 +140,22 @@ app.post('/voice-command', async (req, res) => {
         console.error(err);
         return res.status(500).json({ error: "Database error" });
     }
+});
+
+
+app.post('/run-python', (req, res) => {
+    PythonShell.run('./backend/index.py', null, (err, result) => {
+        if (err) {
+            console.error('Error executing Python script:', err);
+            return res.status(500).json({ error: 'Failed to run Python script' });
+        }
+        
+        // result will be an array, so join the output to see it as a string
+        const output = result.join('\n'); 
+        console.log('Python script output:', output);
+
+        res.json({ message: 'Python script executed successfully', output: output });
+    });
 });
 
 

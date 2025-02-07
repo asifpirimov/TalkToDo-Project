@@ -35,6 +35,7 @@
                                 <em><%= task.due_date %></em>
                             </div>
                             <div class="task-actions">
+                                <span class="task-status"><%= task.status %></span>
                                 <form action="/delete-task/<%= task.id %>" method="POST">
                                     <button type="submit">Delete</button>
                                 </form>
@@ -45,10 +46,27 @@
             </section>
         </main>
 
+        <button id="mic-button" class="mic-button">🎤</button>
+
         <footer>
             <p>&copy; 2025 Task Manager | All Rights Reserved</p>
         </footer>
     </div>
 
+    <script>
+        document.getElementById("mic-button").addEventListener("click", () => {
+    fetch("/run-python", { method: "POST" })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);  // Log the data for debugging if needed
+            // Refresh the page immediately after the process completes
+            window.location.reload();  // This will reload the page right after the process
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+});
+
+    </script>
 </body>
-</html>
+</html
